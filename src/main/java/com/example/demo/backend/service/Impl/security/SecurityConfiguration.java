@@ -2,7 +2,7 @@ package com.example.demo.backend.service.Impl.security;
 
 
 import com.example.demo.component.form.AuthForm;
-import com.vaadin.flow.spring.security.VaadinWebSecurityConfigurerAdapter;
+import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends VaadinWebSecurity {
 
     public static final String LOGOUT_URL = "/logout";
 
@@ -26,12 +26,12 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         super.configure(http);
-        setLoginView(http, AuthForm.class, LOGOUT_URL);
+        setLoginView(http, AuthForm.class);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().antMatchers("/images/*.png");
+        web.ignoring().requestMatchers("/images/*.png");
     }
 }

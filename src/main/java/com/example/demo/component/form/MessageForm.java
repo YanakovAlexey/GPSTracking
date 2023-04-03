@@ -9,14 +9,15 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import jakarta.annotation.security.RolesAllowed;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.Arrays;
 
 
 @Route(value = "message", layout = ContentView.class)
-@RolesAllowed("ROLE_USER")
-//@AnonymousAllowed
+//@RolesAllowed("ROLE_ADMIN")
+@AnonymousAllowed
 public class MessageForm extends Div {
     private final MessageViewModel state = new MessageViewModel();
     public MessageForm() {
@@ -30,8 +31,7 @@ public class MessageForm extends Div {
 
         comboBox.setAllowCustomValue(true);
         comboBox.setItems(Arrays.stream(MessageType.values()).map(MessageType::getRusName).toList());
-
-
+        
         int charLimit = 600;
         Button enterButton = new Button("Отправить");
         TextArea textArea = new TextArea();

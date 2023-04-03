@@ -8,13 +8,13 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import javax.annotation.security.RolesAllowed;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("Создание автомобиля")
 @Route(value = "create-car", layout = ContentView.class)
-@RolesAllowed("ROLE_USER")
-//@AnonymousAllowed
+//@RolesAllowed("ROLE_ADMIN")
+@AnonymousAllowed
 public class CreateCarForm extends FormLayout {
     private final TextField brandField;
     private final TextField modelField;
@@ -22,7 +22,6 @@ public class CreateCarForm extends FormLayout {
     private final Button createButton;
     private final CarViewModel state = new CarViewModel();
     private final CarServant carServant;
-
 
     public CreateCarForm(CarServant carServant) {
         this.carServant = carServant;
@@ -41,7 +40,6 @@ public class CreateCarForm extends FormLayout {
         createButton.addClassNames("enter-button");
         add(createButton);
     }
-
     private TextField createModelField() {
         if (this.modelField != null)
             return this.modelField;
@@ -58,7 +56,6 @@ public class CreateCarForm extends FormLayout {
         this.addClassNames("main-view");
         return model;
     }
-
     private TextField createBrandField() {
         if (this.brandField != null)
             return this.brandField;
@@ -74,7 +71,6 @@ public class CreateCarForm extends FormLayout {
         });
         return brand;
     }
-
     private TextField createRegistrationNumberField() {
         if (this.registrationNumberField != null)
             return this.registrationNumberField;
@@ -90,7 +86,6 @@ public class CreateCarForm extends FormLayout {
         });
         return registrationNumber;
     }
-
     private Button createButton() {
         if (this.createButton != null)
             return this.createButton;
@@ -101,7 +96,6 @@ public class CreateCarForm extends FormLayout {
         });
         return button;
     }
-
     private void createCar() {
         try {
             carServant.createCar(state.registrationNumber, state.brand, state.model);
@@ -110,7 +104,6 @@ public class CreateCarForm extends FormLayout {
             Notification.show(e.getMessage()).open();
         }
     }
-
     private static class CarViewModel {
         String registrationNumber = "";
         String brand = "";

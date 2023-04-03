@@ -1,9 +1,11 @@
 package com.example.demo.backend.viewModel;
 
 import com.example.demo.backend.domain.PersistentObject;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @NoArgsConstructor
@@ -12,5 +14,4 @@ public class CarViewModel extends PersistentObject {
     String brand;
     String model;
     String registrationNumber;
-
 }

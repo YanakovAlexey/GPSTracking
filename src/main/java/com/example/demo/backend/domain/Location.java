@@ -1,13 +1,12 @@
 package com.example.demo.backend.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Table(name = "location")
 @Setter
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Location extends PersistentObject {
     @Column(name = "lat")
-    String lat;
+    double lat;
     @Column(name = "lon")
-    String lon;
+    double lon;
 }

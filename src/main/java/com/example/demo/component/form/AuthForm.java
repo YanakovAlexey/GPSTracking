@@ -21,7 +21,7 @@ public class AuthForm extends FormLayout implements BeforeEnterObserver {
     private final TextField loginTF;
     private final PasswordField passwordField;
     private final Button enterButton;
-    private final AuthViewModel state = new AuthViewModel();
+    private final AuthFormViewModel state = new AuthFormViewModel();
     private final AccountServiceImpl accountService;
     private final AuthenticatedUser authenticatedUser;
     //private final Label label;
@@ -126,7 +126,7 @@ public class AuthForm extends FormLayout implements BeforeEnterObserver {
           //  this.label.setText("Вы авторизованы как " + username);
         }
     }
-    private static class AuthViewModel {
+    private static class AuthFormViewModel {
         String login = "";
         String password = "";
     }

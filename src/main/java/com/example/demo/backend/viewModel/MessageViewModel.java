@@ -4,9 +4,8 @@ package com.example.demo.backend.viewModel;
 import com.example.demo.backend.domain.PersistentObject;
 import lombok.*;
 
-import javax.persistence.metamodel.Type;
+import java.lang.reflect.Type;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @Getter
