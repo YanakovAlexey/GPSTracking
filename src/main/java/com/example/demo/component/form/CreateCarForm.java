@@ -1,6 +1,8 @@
 package com.example.demo.component.form;
 
 import com.example.demo.backend.domain.User;
+import com.example.demo.backend.domain.UserCar;
+import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
 import com.example.demo.backend.service.servant.CarServant;
 import com.example.demo.backend.views.ContentView;
 import com.vaadin.flow.component.button.Button;
@@ -11,9 +13,11 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
+import javax.annotation.security.RolesAllowed;
+
 @PageTitle("Создание автомобиля")
 @Route(value = "create-car", layout = ContentView.class)
-//@RolesAllowed("ROLE_ADMIN")
+@RolesAllowed("ROLE_USER")
 @AnonymousAllowed
 public class CreateCarForm extends FormLayout {
     private final TextField brandField;
@@ -22,9 +26,10 @@ public class CreateCarForm extends FormLayout {
     private final Button createButton;
     private final CarViewModel state = new CarViewModel();
     private final CarServant carServant;
-
-    public CreateCarForm(CarServant carServant) {
+    private final AuthenticatedUser authenticatedUser;
+    public CreateCarForm(CarServant carServant, AuthenticatedUser authenticatedUser) {
         this.carServant = carServant;
+        this.authenticatedUser = authenticatedUser;
         this.brandField = createBrandField();
         this.modelField = createModelField();
         this.registrationNumberField = createRegistrationNumberField();
@@ -103,7 +108,7 @@ public class CreateCarForm extends FormLayout {
 
     private void createCar() {
         try {
-            carServant.createCar(state.registrationNumber, state.brand, state.model, state.user);
+            carServant.createCar(state.registrationNumber, state.brand, state.model, authenticatedUser.get().get());
             Notification.show("Автомобиль успешно добавлен.").open();
         } catch (Exception e) {
             Notification.show(e.getMessage()).open();
@@ -114,6 +119,5 @@ public class CreateCarForm extends FormLayout {
         String registrationNumber = "";
         String brand = "";
         String model = "";
-        User user;
     }
 }

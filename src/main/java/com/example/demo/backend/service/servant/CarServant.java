@@ -2,6 +2,7 @@ package com.example.demo.backend.service.servant;
 
 import com.example.demo.backend.domain.Car;
 import com.example.demo.backend.domain.User;
+import com.example.demo.backend.domain.UserCar;
 import com.example.demo.backend.repository.CarRepository;
 import com.example.demo.backend.repository.UserCarRepository;
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
@@ -15,14 +16,13 @@ import java.util.List;
 public class CarServant {
     private final AuthenticatedUser user;
     CarRepository repository;
-    private final UserCarRepository userCarRepository;
+    UserCarRepository userCarRepository;
 
     public CarServant(AuthenticatedUser user, CarRepository repository, UserCarRepository userCarRepository) {
         this.user = user;
         this.repository = repository;
         this.userCarRepository = userCarRepository;
     }
-
     public void searchCar(String registrationNumber) throws Exception {
         var carOptional = repository.searchByRegistrationNumber(registrationNumber);
 
@@ -31,7 +31,6 @@ public class CarServant {
         if (carOptional.isEmpty())
             throw new Exception("Такого автомобиля нет!");
     }
-
     public List<CarViewModel> getCars(String brand, String model, String registrationNumber) {
         List<Car> carList = repository.findAll();
         List<CarViewModel> carViewModels = new ArrayList<>();
@@ -44,7 +43,6 @@ public class CarServant {
         }
         return carViewModels;
     }
-
     public void createCar(String registrationNumber, String brand, String model, User user) throws Exception {
         if (brand == null || brand.isEmpty()) {
             throw new Exception("Марка не может быть пустой!");
@@ -61,21 +59,14 @@ public class CarServant {
         if (carOptional.isPresent()) {
             throw new Exception("Автомобиль с таким регистрационным номером уже существует!");
         }
-//        Car car = new Car();
-//        car.setRegistrationNumber(registrationNumber);
-//        car.setBrand(brand);
-//        car.setModel(model);
 
         Car car = Car.builder()
                 .brand(brand)
                 .registrationNumber(registrationNumber)
                 .model(model)
+                .userId(user.getId()) // добавляем id пользователя
                 .build();
-
-        car.setUserId(user.getId());
-
         repository.save(car);
-
     }
 
     public void checkRegistrationNumberFormat(String registrationNumber) throws Exception {

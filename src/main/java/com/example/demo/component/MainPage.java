@@ -9,8 +9,11 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.security.RolesAllowed;
+
 @Route(value = "/main", layout = MainLayout.class)
-@AnonymousAllowed
+@RolesAllowed("ROLE_USER")
+//@AnonymousAllowed
 @Component
 @UIScope
 public class MainPage extends SplitLayout {
