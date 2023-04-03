@@ -19,42 +19,12 @@ public class HeaderView extends HorizontalLayout {
         Button authButton = new Button("Вход в систему");
         authButton.addClassNames("auth-button");
 
-
-        Image brLine = new Image();
-        brLine.setSrc("https://i.ibb.co/7JGwZpX/line.png");
-        brLine.addClassNames("brLine");
-        Div btnsContainer = new Div();
-//        Button usersBtn = new Button("Водители");
-//
-//        Image firstBrDot = new Image();
-//        firstBrDot.setSrc("https://i.ibb.co/prnmMcL/brDot.png");
-//        firstBrDot.addClassNames("firstBrDot");
-        Button carsBtn = new Button("Автомобили");
-
-        Image secondBrDot = new Image();
-        secondBrDot.setSrc("https://i.ibb.co/prnmMcL/brDot.png");
-        secondBrDot.addClassNames("secondBrDot");
-        Button tracksBtn = new Button("Треки");
-        btnsContainer.add(brLine, carsBtn, secondBrDot, tracksBtn);
-
-        btnsContainer.addClassNames("btnsContainer", "hidden");
-       // usersBtn.addClassNames("usersBtn");
-        carsBtn.addClassNames("carsBtn");
-        tracksBtn.addClassNames("tracksBtn");
-
         authButton.addClickListener(event -> {
             authButton.getUI().ifPresent(ui -> ui.navigate("/auth"));
         });
 
-
-        if (authenticatedUser.get().isPresent()) {
-            btnsContainer.setVisible(true);
-        } else {
-            btnsContainer.setVisible(false);
-        }
-
         this.addClassNames("view-header");
-        this.add(createLogo(), btnsContainer, authButton);
+        this.add(createLogo(), authButton);
 
 
         //        UI.getCurrent().getPage()

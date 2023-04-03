@@ -8,7 +8,14 @@
     border-radius: 8px;
     box-shadow: 20px #3f3785e8;
     margin-left: 5px;
-    margin-bottom: 10px;
+    padding-bottom: 24px;
+  }
+
+  .txtLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
   }
 
 .carLabel {
@@ -36,8 +43,13 @@
 
   vaadin-select > label {
     color: aliceblue;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 550;
 }
   vaadin-date-picker > label {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 550;
+    
     color: aliceblue;
 }
 vaadin-select-value-button[placeholder]{

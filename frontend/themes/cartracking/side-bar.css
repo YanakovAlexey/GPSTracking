@@ -21,3 +21,12 @@
     background-color: rgba(42, 126, 182, 0.918);
     cursor: pointer;
   }
+
+  .carsList {
+    margin-bottom: -6px;
+  }
+
+  .j {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+  }

@@ -7,9 +7,8 @@ import com.example.demo.utils.MapJSUtil;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -26,6 +25,7 @@ public class CarRoutesView extends Div {
     private final DatePicker departureDatePicker;
     private final DatePicker returnDatePicker;
     private final Button createTrackBtn;
+    private Label txtLabel;
     private final MapView mapView;
 
     private final CarService carService;
@@ -48,12 +48,20 @@ public class CarRoutesView extends Div {
         this.departureDatePicker = createDepartureDatePicker();
         this.returnDatePicker = createReturnDatePicker();
         this.createTrackBtn = createTrackButton();
+        this.txtLabel = createTxtLabel();
 
         this.addClassNames("carRoutesView");
-        this.add(carSelect, departureDatePicker, returnDatePicker, createTrackBtn);
+        this.add(txtLabel, carSelect, departureDatePicker, returnDatePicker, createTrackBtn);
     }
+    public Label createTxtLabel(){
+        txtLabel = new Label("Создание маршрута");
+        txtLabel.addClassNames("txtLabel");
+        this.add(txtLabel);
 
+        return txtLabel;
+    }
     public Select<CarViewModel> createCarSelect() {
+
         Select<CarViewModel> carSelect = new Select<>();
         carSelect.setLabel("Выберите автомобиль");
         carSelect.setItems(state.cars);
@@ -65,7 +73,7 @@ public class CarRoutesView extends Div {
         if (this.createTrackBtn != null)
             return this.createTrackBtn;
 
-        Button createBtn = new Button("Создать трек");
+        Button createBtn = new Button("Показать маршрут");
         createBtn.addClassNames("createTrackBtn");
         createBtn.addClickListener(e -> {
             var coordinates = locationService
