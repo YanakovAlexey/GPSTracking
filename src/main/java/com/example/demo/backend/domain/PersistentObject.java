@@ -1,7 +1,6 @@
 package com.example.demo.backend.domain;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @MappedSuperclass
