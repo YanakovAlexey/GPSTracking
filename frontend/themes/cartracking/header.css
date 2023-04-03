@@ -16,6 +16,17 @@
   cursor: pointer;
 }
 
+.exit-button {
+  position: relative;
+  margin: 26px 20px 10px auto;
+  background-color: rgba(37, 109, 156, 0.918);
+  color: aliceblue;
+}
+.exit-button:hover {
+  background-color: rgba(42, 126, 182, 0.918);
+  cursor: pointer;
+}
+
 .logo {
   display: flex;
   margin: 10px;

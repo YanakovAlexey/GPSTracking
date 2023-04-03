@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 public class MainPage extends SplitLayout {
     private final MapView mapView;
     private final SideBarView sideBarView;
+
     public MainPage(MapView mapView, SideBarView sideBarView) {
         this.mapView = mapView;
         this.sideBarView = sideBarView;

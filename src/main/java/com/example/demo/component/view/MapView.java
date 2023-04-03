@@ -2,13 +2,13 @@ package com.example.demo.component.view;
 
 import com.example.demo.backend.service.CarService;
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
+import com.example.demo.backend.views.HeaderView;
 import com.example.demo.ui.OSMMapView;
 import com.example.demo.utils.MapJSUtil;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.UIScope;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,12 +22,15 @@ public class MapView extends VerticalLayout {
     private Button btnCenter = new Button("Показать");
     private OSMMapView mapView;
     private final AuthenticatedUser authenticatedUser;
+    private final HeaderView headerView;
 
-    public MapView(CarService carService,
-                   AuthenticatedUser authenticatedUser) {
+    @Autowired
+    public MapView(AuthenticatedUser authenticatedUser, HeaderView headerView) {
         this.authenticatedUser = authenticatedUser;
+        this.headerView = headerView;
         this.setPadding(false);
         this.addClassNames("body");
+        this.headerView.visibleButtonAuth();
 
         this.btnCenter.addClickListener(e -> {
             final Random rnd = new Random();
@@ -55,7 +58,7 @@ public class MapView extends VerticalLayout {
                 new MapJSUtil.Coordinate(35.0, 41.0),
                 new MapJSUtil.Coordinate(-16.0, -17.0),
                 new MapJSUtil.Coordinate(5.0, 21.0)
-                );
+        );
 
         mapView.addPolyline(coords);
     }
