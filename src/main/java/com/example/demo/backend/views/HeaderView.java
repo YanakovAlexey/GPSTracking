@@ -47,7 +47,7 @@ public class HeaderView extends HorizontalLayout {
         });
 
 
-        if (!authenticatedUser.get().isPresent()) {
+        if (authenticatedUser.get().isPresent()) {
             btnsContainer.setVisible(true);
         } else {
             btnsContainer.setVisible(false);
