@@ -1,0 +1,34 @@
+.carsInfoContainer {
+    display: flex;
+    flex-direction: column;
+    width: 345px;
+    height: 170px;
+    padding: 10px 15px;
+    background-color: rgb(43, 43, 43);
+    border-radius: 8px;
+    box-shadow: 20px #3f3785e8;
+    margin-left: 5px;
+  }
+
+.brandLabel {
+    color: rgb(211, 211, 211);
+}
+.showBrandLabel {
+    color: rgb(211, 211, 211);
+}
+
+.modelLabel {
+    color: rgb(211, 211, 211);
+
+}
+.showModelLabel {
+    color: rgb(211, 211, 211);
+
+}
+
+.registrationNumberLabel {
+    color: rgb(211, 211, 211);
+}
+.showRegistrationNumberLabel {
+    color: rgb(211, 211, 211);
+}

@@ -1,0 +1,47 @@
+.usersInfoContainer {
+    display: flex;
+    flex-direction: column;
+    width: 345px;
+    height: 220px;
+    padding: 10px 15px;
+    background-color: rgb(43, 43, 43);
+    border-radius: 8px;
+    box-shadow: 20px #3f3785e8;
+    margin-left: 5px;
+  }
+
+.nameLabel {
+    color: rgb(211, 211, 211);
+}
+.showNameLabel {
+    color: rgb(211, 211, 211);
+}
+
+.surnameLabel {
+    color: rgb(211, 211, 211);
+
+}
+.showSurnameLabel {
+    color: rgb(211, 211, 211);
+
+}
+
+.carLabel {
+    color: rgb(211, 211, 211);
+}
+.showCarLabel {
+    color: rgb(211, 211, 211);
+}
+
+.registrationNumberLabel {
+    color: rgb(211, 211, 211);
+}
+.showRegistrationNumberLabel {
+    color: rgb(211, 211, 211);
+}
+
+.j {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
