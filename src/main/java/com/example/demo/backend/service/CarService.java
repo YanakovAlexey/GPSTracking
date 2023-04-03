@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface CarService {
+
     Car create(Car car);
     List<CarViewModel> getAll();
 }

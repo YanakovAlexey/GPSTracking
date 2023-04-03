@@ -1,5 +1,6 @@
 package com.example.demo.component.form;
 
+import com.example.demo.backend.domain.User;
 import com.example.demo.backend.service.servant.CarServant;
 import com.example.demo.backend.views.ContentView;
 import com.vaadin.flow.component.button.Button;
@@ -39,6 +40,7 @@ public class CreateCarForm extends FormLayout {
         createButton.addClassNames("enter-button");
         add(createButton);
     }
+
     private TextField createModelField() {
         if (this.modelField != null)
             return this.modelField;
@@ -55,6 +57,7 @@ public class CreateCarForm extends FormLayout {
         this.addClassNames("main-view");
         return model;
     }
+
     private TextField createBrandField() {
         if (this.brandField != null)
             return this.brandField;
@@ -70,6 +73,7 @@ public class CreateCarForm extends FormLayout {
         });
         return brand;
     }
+
     private TextField createRegistrationNumberField() {
         if (this.registrationNumberField != null)
             return this.registrationNumberField;
@@ -85,6 +89,7 @@ public class CreateCarForm extends FormLayout {
         });
         return registrationNumber;
     }
+
     private Button createButton() {
         if (this.createButton != null)
             return this.createButton;
@@ -95,17 +100,20 @@ public class CreateCarForm extends FormLayout {
         });
         return button;
     }
+
     private void createCar() {
         try {
-            carServant.createCar(state.registrationNumber, state.brand, state.model);
+            carServant.createCar(state.registrationNumber, state.brand, state.model, state.user);
             Notification.show("Автомобиль успешно добавлен.").open();
         } catch (Exception e) {
             Notification.show(e.getMessage()).open();
         }
     }
+
     private static class CarViewModel {
         String registrationNumber = "";
         String brand = "";
         String model = "";
+        User user;
     }
 }
