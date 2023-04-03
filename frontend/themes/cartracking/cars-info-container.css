@@ -13,14 +13,14 @@
   }
 
 .brandLabel {
-    color: rgb(211, 211, 211);
+    color: rgba(42, 126, 182, 0.918);
 }
 .showBrandLabel {
     color: rgb(211, 211, 211);
 }
 
 .modelLabel {
-    color: rgb(211, 211, 211);
+    color: rgba(42, 126, 182, 0.918);
 
 }
 .showModelLabel {
@@ -29,7 +29,7 @@
 }
 
 .registrationNumberLabel {
-    color: rgb(211, 211, 211);
+    color: rgba(42, 126, 182, 0.918);
 }
 .showRegistrationNumberLabel {
     color: rgb(211, 211, 211);

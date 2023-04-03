@@ -8,33 +8,30 @@
     border-radius: 8px;
     box-shadow: 20px #3f3785e8;
     margin-left: 5px;
-    padding-bottom: 24px;
+    padding-bottom: 45px;
   }
 
   .txtLabel {
     display: flex;
-    justify-content: center;
-    align-items: center;
+
     color: aliceblue;
   }
 
 .carLabel {
-    color: rgb(211, 211, 211);
+    color: rgb(43, 43, 43);
 }
 .departureDate {
-    color: rgb(211, 211, 211);
-}
-.departureDate::placeholder {
-    color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
 }
 
 .returnDate {
-    color: rgb(211, 211, 211);
+  color: rgb(43, 43, 43);
 }
 
 .createTrackBtn {
     background-color: rgba(37, 109, 156, 0.918);
     color: aliceblue;
+    margin-top: 20px;
   }
   .createTrackBtn:hover {
     background-color: rgba(42, 126, 182, 0.918);
@@ -42,7 +39,7 @@
   }
 
   vaadin-select > label {
-    color: aliceblue;
+    color: rgb(12, 106, 189);
     font-family: 'Roboto', sans-serif;
     font-weight: 550;
 }
@@ -50,16 +47,15 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 550;
     
-    color: aliceblue;
-}
-vaadin-select-value-button[placeholder]{
-  color: aliceblue;
+    color: rgb(12, 106, 189);
 }
 
-vaadin-select-value-button > vaadin-select-item{
-  color: aliceblue;
+vaadin-date-picker::part(input-field){
+  background-color: rgb(226, 226, 226);
+  border-radius: 3px;
 }
 
 vaadin-select::part(input-field){
-  color: rgb(105, 105, 105);
+  background-color: rgb(226, 226, 226);
+  border-radius: 3px;
 }
