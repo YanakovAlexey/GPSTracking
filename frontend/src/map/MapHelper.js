@@ -24,10 +24,10 @@ window.createMapView = function createMapView(id) {
     }
 }
 
-window.addRoute = function addRoute(pathCoords) {
+window.addRoute = function addRoute(pathCoords, color) {
     console.log("path coords is ", pathCoords)
     L.polyline(pathCoords, {
-        color: 'blue',
+        color: color,
         weight: 7,
         opacity: 1
     }).addTo(mainMapView);

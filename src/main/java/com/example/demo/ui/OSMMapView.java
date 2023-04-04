@@ -1,5 +1,6 @@
 package com.example.demo.ui;
 
+import com.example.demo.utils.ColorRoad;
 import com.example.demo.utils.MapJSUtil;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
@@ -7,6 +8,7 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
 
 import java.util.Collection;
+import java.util.Random;
 
 @JsModule("./src/map/MapHelper.js")
 public class OSMMapView extends Div {
@@ -42,8 +44,10 @@ public class OSMMapView extends Div {
     }
 
     public void addPolyline(Collection<MapJSUtil.Coordinate> coordinates) {
+        int rndNumber = (int) (Math.random() * ColorRoad.values().length);
         final String coordinatesScript = MapJSUtil.coordinatesArrayScript(coordinates);
-        final String script = String.format("addRoute(%s)", coordinatesScript);
+        final String color = ColorRoad.values()[rndNumber].name().toLowerCase();
+        final String script = String.format("addRoute(%s, '%s')", coordinatesScript, color);
         var executionResult = this.getElement().executeJs(script);
         System.out.printf("Execution result is %s%n", executionResult.isSentToBrowser());
     }
