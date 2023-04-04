@@ -13,7 +13,7 @@ public interface CarService {
 
     List<CarViewModel> getAll();
 
-    List<CarViewModel> getCarsByUserId(long userId);
+    List<Car> getCarsByUserId(long userId);
 
 
 }

@@ -40,8 +40,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<CarViewModel> getCarsByUserId(long userId) {
-        List<CarViewModel> cars = carRepository.getAllCarByUserId(userId);
+    public List<Car> getCarsByUserId(long userId) {
+        List<Car> cars = carRepository.getAllCarByUserId(userId);
         return cars;
     }
 }

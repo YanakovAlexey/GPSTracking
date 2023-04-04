@@ -1,5 +1,6 @@
 package com.example.demo.component.view;
 
+import com.example.demo.backend.domain.Car;
 import com.example.demo.backend.service.CarService;
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
 import com.example.demo.backend.service.LocationService;
@@ -22,7 +23,7 @@ import java.util.List;
 @UIScope()
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CarRoutesView extends Div {
-    private Select<CarViewModel> carSelect;
+    private Select<Car> carSelect;
     private final DatePicker departureDatePicker;
     private final DatePicker returnDatePicker;
     private final Button createTrackBtn;
@@ -65,9 +66,9 @@ public class CarRoutesView extends Div {
         return txtLabel;
     }
 
-    public Select<CarViewModel> createCarSelect() {
+    public Select<Car> createCarSelect() {
 
-        Select<CarViewModel> carSelect = new Select<>();
+        Select<Car> carSelect = new Select<>();
         carSelect.setLabel("Выберите автомобиль");
         carSelect.setItems(state.cars);
         carSelect.setItemLabelGenerator(car ->
@@ -127,11 +128,11 @@ public class CarRoutesView extends Div {
     }
 
     private static class CarRouteViewModel {
-        final List<CarViewModel> cars;
+        final List<Car> cars;
         LocalDate departureDate;
         LocalDate returnDate;
 
-        CarRouteViewModel(List<CarViewModel> cars) {
+        CarRouteViewModel(List<Car> cars) {
             this.cars = cars;
         }
     }

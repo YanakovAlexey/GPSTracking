@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface CarRepository extends JpaRepository<Car, Long> {
     Optional<Car> searchByRegistrationNumber(String registrationNumber);
     List<Car> searchByBrandAndModelAndRegistrationNumber(String brand, String model, String registrationNumber);
-    List<CarViewModel> getAllCarByUserId(Long id);
+    List<Car> getAllCarByUserId(Long id);
 
 }
