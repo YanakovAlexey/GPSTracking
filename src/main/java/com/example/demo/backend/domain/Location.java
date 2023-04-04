@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "location")
 @Setter
@@ -16,6 +14,10 @@ import javax.persistence.Table;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Location extends PersistentObject {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carId")
+    Car car;
     @Column(name = "lat")
     double lat;
     @Column(name = "lon")

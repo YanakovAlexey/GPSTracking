@@ -23,6 +23,7 @@ public class CarServant {
         this.repository = repository;
         this.userCarRepository = userCarRepository;
     }
+
     public void searchCar(String registrationNumber) throws Exception {
         var carOptional = repository.searchByRegistrationNumber(registrationNumber);
 
@@ -31,6 +32,7 @@ public class CarServant {
         if (carOptional.isEmpty())
             throw new Exception("Такого автомобиля нет!");
     }
+
     public List<CarViewModel> getCars(String brand, String model, String registrationNumber) {
         List<Car> carList = repository.findAll();
         List<CarViewModel> carViewModels = new ArrayList<>();
@@ -43,6 +45,7 @@ public class CarServant {
         }
         return carViewModels;
     }
+
     public void createCar(String registrationNumber, String brand, String model, User user) throws Exception {
         if (brand == null || brand.isEmpty()) {
             throw new Exception("Марка не может быть пустой!");
@@ -64,7 +67,7 @@ public class CarServant {
                 .brand(brand)
                 .registrationNumber(registrationNumber)
                 .model(model)
-                .userId(user.getId()) // добавляем id пользователя
+                .user(user) // добавляем id пользователя
                 .build();
         repository.save(car);
     }

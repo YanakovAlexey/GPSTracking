@@ -51,15 +51,6 @@ public class MapView extends VerticalLayout {
     }
 
     public void addRoute(List<MapJSUtil.Coordinate> coordinates) {
-        //todo add route to map
-        var coords = List.of(
-                new MapJSUtil.Coordinate(55.0, 1.0),
-                new MapJSUtil.Coordinate(53.0, -67.0),
-                new MapJSUtil.Coordinate(35.0, 41.0),
-                new MapJSUtil.Coordinate(-16.0, -17.0),
-                new MapJSUtil.Coordinate(5.0, 21.0)
-        );
-
-        mapView.addPolyline(coords);
+        mapView.addPolyline(coordinates);
     }
 }

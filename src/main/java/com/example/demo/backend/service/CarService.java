@@ -14,6 +14,4 @@ public interface CarService {
     List<CarViewModel> getAll();
 
     List<Car> getCarsByUserId(long userId);
-
-
 }

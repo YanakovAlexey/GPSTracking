@@ -4,12 +4,11 @@ import com.example.demo.backend.domain.Car;
 import com.example.demo.backend.service.CarService;
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
 import com.example.demo.backend.service.LocationService;
-import com.example.demo.backend.viewModel.CarViewModel;
-import com.example.demo.utils.MapJSUtil;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -17,12 +16,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Component
 @UIScope()
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CarRoutesView extends Div {
+
     private Select<Car> carSelect;
     private final DatePicker departureDatePicker;
     private final DatePicker returnDatePicker;
@@ -73,6 +75,9 @@ public class CarRoutesView extends Div {
         carSelect.setItems(state.cars);
         carSelect.setItemLabelGenerator(car ->
                 String.format("%s %s(%s)", car.getBrand(), car.getModel(), car.getRegistrationNumber()));
+        carSelect.addValueChangeListener(event -> {
+            state.carId = event.getValue().getId();
+        });
         return carSelect;
     }
 
@@ -83,11 +88,12 @@ public class CarRoutesView extends Div {
         Button createBtn = new Button("Показать маршрут");
         createBtn.addClassNames("createTrackBtn");
         createBtn.addClickListener(e -> {
-            var coordinates = locationService
-                    .getAllLocations()
-                    .stream()
-                    .map(l -> new MapJSUtil.Coordinate(l.getLat(), l.getLon()))
-                    .toList();
+            if (state.carId == 0) {
+                Notification.show("Select car!!!");
+                return;
+            }
+            var coordinates = locationService.
+                    getAllByCar(state.carId, convertDate(state.departureDate), convertDate(state.returnDate));
             mapView.addRoute(coordinates);
         });
         return createBtn;
@@ -127,13 +133,20 @@ public class CarRoutesView extends Div {
         return returnDate;
     }
 
+    private ZonedDateTime convertDate(LocalDate date) {
+        return date.atStartOfDay(ZoneId.systemDefault());
+    }
+
     private static class CarRouteViewModel {
         final List<Car> cars;
+        long carId = 0;
         LocalDate departureDate;
         LocalDate returnDate;
 
         CarRouteViewModel(List<Car> cars) {
             this.cars = cars;
         }
+
+
     }
 }

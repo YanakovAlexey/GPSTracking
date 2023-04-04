@@ -3,9 +3,7 @@ package com.example.demo.backend.domain;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "cars")
 @Setter
@@ -18,8 +16,9 @@ import javax.persistence.Table;
 public class Car extends PersistentObject {
 
 
-    @Column(name = "userId")
-    Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    User user;
     @Column(name = "brand")
     String brand;
     @Column(name = "model")
