@@ -36,22 +36,11 @@ public class AuthForm extends FormLayout implements BeforeEnterObserver {
         this.passwordField = createPasswordField();
         this.enterButton = createEnterButton();
 
-
-
-      //  this.setWidth(String.valueOf(false));
-       // this.label = createLabel();
-//        this.setResponsiveSteps(new ResponsiveStep("0", 1)
-//        );
-
-
-
         enterButton.addClickListener(event -> {
             if (authenticatedUser.get().isPresent()) {
                 enterButton.getUI().ifPresent(ui ->
                         ui.navigate("main"));
 
-//                headerView.authButton.setText("Выйти");
-//                headerView.authButton.addClickListener(event1 -> {authenticatedUser.logout();});
             }
         });
 
@@ -65,8 +54,6 @@ public class AuthForm extends FormLayout implements BeforeEnterObserver {
 
         add(loginTF, passwordField, enterButton);
 
-        //addFormItem(this.label, "Авторизованный пользователь");
-        //add(label);
     }
     private TextField createLoginField() {
         if (this.loginTF != null)

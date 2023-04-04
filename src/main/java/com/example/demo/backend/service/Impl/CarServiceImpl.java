@@ -13,6 +13,7 @@ import java.util.List;
 public class CarServiceImpl implements CarService {
     final CarRepository carRepository;
 
+
     public CarServiceImpl(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
@@ -22,6 +23,7 @@ public class CarServiceImpl implements CarService {
         carRepository.save(car);
         return car;
     }
+
     @Override
     public List<CarViewModel> getAll() {
         List<Car> carList = carRepository.findAll();
@@ -35,5 +37,11 @@ public class CarServiceImpl implements CarService {
             carViewModels.add(carViewModel);
         }
         return carViewModels;
+    }
+
+    @Override
+    public List<CarViewModel> getCarsByUserId(long userId) {
+        List<CarViewModel> cars = carRepository.getAllCarByUserId(userId);
+        return cars;
     }
 }

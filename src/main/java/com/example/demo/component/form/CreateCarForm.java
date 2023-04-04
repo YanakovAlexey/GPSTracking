@@ -27,6 +27,7 @@ public class CreateCarForm extends FormLayout {
     private final CarViewModel state = new CarViewModel();
     private final CarServant carServant;
     private final AuthenticatedUser authenticatedUser;
+
     public CreateCarForm(CarServant carServant, AuthenticatedUser authenticatedUser) {
         this.carServant = carServant;
         this.authenticatedUser = authenticatedUser;

@@ -1,6 +1,8 @@
 package com.example.demo.backend.repository;
 
 import com.example.demo.backend.domain.Car;
+import com.example.demo.backend.domain.User;
+import com.example.demo.backend.viewModel.CarViewModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +13,6 @@ import java.util.Optional;
 public interface CarRepository extends JpaRepository<Car, Long> {
     Optional<Car> searchByRegistrationNumber(String registrationNumber);
     List<Car> searchByBrandAndModelAndRegistrationNumber(String brand, String model, String registrationNumber);
+    List<CarViewModel> getAllCarByUserId(Long id);
+
 }

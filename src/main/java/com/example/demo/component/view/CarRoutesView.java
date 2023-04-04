@@ -1,6 +1,7 @@
 package com.example.demo.component.view;
 
 import com.example.demo.backend.service.CarService;
+import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
 import com.example.demo.backend.service.LocationService;
 import com.example.demo.backend.viewModel.CarViewModel;
 import com.example.demo.utils.MapJSUtil;
@@ -31,15 +32,17 @@ public class CarRoutesView extends Div {
     private final CarService carService;
     private final LocationService locationService;
     private final CarRouteViewModel state;
+    private final AuthenticatedUser authenticatedUser;
 
     CarRoutesView(MapView mapView,
                   CarService carService,
-                  LocationService locationService) {
+                  LocationService locationService, AuthenticatedUser authenticatedUser) {
         this.carService = carService;
         this.locationService = locationService;
+        this.authenticatedUser = authenticatedUser;
 
         //todo change to get cars by user. get user from Authenticated user.
-        var cars = carService.getAll();
+        var cars = carService.getCarsByUserId(authenticatedUser.get().get().getId());
         this.state = new CarRouteViewModel(cars);
 
         this.mapView = mapView;
@@ -53,23 +56,26 @@ public class CarRoutesView extends Div {
         this.addClassNames("carRoutesView");
         this.add(txtLabel, carSelect, departureDatePicker, returnDatePicker, createTrackBtn);
     }
-    public Label createTxtLabel(){
+
+    public Label createTxtLabel() {
         txtLabel = new Label("Создание маршрута");
         txtLabel.addClassNames("txtLabel");
         this.add(txtLabel);
 
         return txtLabel;
     }
+
     public Select<CarViewModel> createCarSelect() {
 
         Select<CarViewModel> carSelect = new Select<>();
         carSelect.setLabel("Выберите автомобиль");
         carSelect.setItems(state.cars);
         carSelect.setItemLabelGenerator(car ->
-                String.format("%s %s(%s)",car.getBrand(), car.getModel(), car.getRegistrationNumber()));
+                String.format("%s %s(%s)", car.getBrand(), car.getModel(), car.getRegistrationNumber()));
         return carSelect;
     }
-    private Button createTrackButton(){
+
+    private Button createTrackButton() {
         if (this.createTrackBtn != null)
             return this.createTrackBtn;
 
@@ -85,7 +91,8 @@ public class CarRoutesView extends Div {
         });
         return createBtn;
     }
-    private DatePicker createDepartureDatePicker(){
+
+    private DatePicker createDepartureDatePicker() {
         if (this.departureDatePicker != null)
             return this.departureDatePicker;
 
@@ -94,14 +101,15 @@ public class CarRoutesView extends Div {
         departureDate.addClassNames("departureDate");
         departureDate.setMax(state.departureDate);
         departureDate.addValueChangeListener((event) -> {
-                    if (event.getValue() == null) {
-                        return;
-                    }
-                    state.departureDate = event.getValue();
-                });
+            if (event.getValue() == null) {
+                return;
+            }
+            state.departureDate = event.getValue();
+        });
         return departureDate;
     }
-    private DatePicker createReturnDatePicker(){
+
+    private DatePicker createReturnDatePicker() {
         if (this.returnDatePicker != null)
             return this.returnDatePicker;
 
@@ -110,11 +118,11 @@ public class CarRoutesView extends Div {
         returnDate.addClassNames("returnDate");
         returnDate.setMin(state.returnDate);
         returnDate.addValueChangeListener((event) -> {
-                    if (event.getValue() == null) {
-                        return;
-                    }
-                    state.returnDate = event.getValue();
-                });
+            if (event.getValue() == null) {
+                return;
+            }
+            state.returnDate = event.getValue();
+        });
         return returnDate;
     }
 
@@ -122,6 +130,7 @@ public class CarRoutesView extends Div {
         final List<CarViewModel> cars;
         LocalDate departureDate;
         LocalDate returnDate;
+
         CarRouteViewModel(List<CarViewModel> cars) {
             this.cars = cars;
         }
