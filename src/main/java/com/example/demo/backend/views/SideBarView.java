@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class SideBarView extends HorizontalLayout {
     public SideBarView(CarRoutesView carRoutesView) {
 
-        this.add(carRoutesView, carsInfoContainer());
+        this.add(carRoutesView);
         this.addClassNames("side-bar");
     }
     public Div createBtnContainer (){
