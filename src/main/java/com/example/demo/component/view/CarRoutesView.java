@@ -4,6 +4,7 @@ import com.example.demo.backend.domain.Car;
 import com.example.demo.backend.service.CarService;
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
 import com.example.demo.backend.service.LocationService;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
@@ -29,6 +30,8 @@ public class CarRoutesView extends Div {
     private final DatePicker departureDatePicker;
     private final DatePicker returnDatePicker;
     private final Button createTrackBtn;
+
+    private final Button createCarButton;
     private Label txtLabel;
     private final MapView mapView;
 
@@ -43,7 +46,6 @@ public class CarRoutesView extends Div {
         this.carService = carService;
         this.locationService = locationService;
         this.authenticatedUser = authenticatedUser;
-
         //todo change to get cars by user. get user from Authenticated user.
         var cars = carService.getCarsByUserId(authenticatedUser.get().get().getId());
         this.state = new CarRouteViewModel(cars);
@@ -55,9 +57,20 @@ public class CarRoutesView extends Div {
         this.returnDatePicker = createReturnDatePicker();
         this.createTrackBtn = createTrackButton();
         this.txtLabel = createTxtLabel();
+        this.createCarButton = createCarButton();
 
         this.addClassNames("carRoutesView");
-        this.add(txtLabel, carSelect, departureDatePicker, returnDatePicker, createTrackBtn);
+        this.add(txtLabel, carSelect, departureDatePicker, returnDatePicker, createTrackBtn, createCarButton());
+    }
+
+    private Button createCarButton() {
+        Button createCarBtn = new Button("Добавить автомобиль");
+        createCarBtn.addClickListener(event -> {
+            createCarBtn.getUI().ifPresent(ui -> ui.navigate("/create-car"));
+
+        });
+        createCarBtn.addClassNames("create-track-button");
+        return createCarBtn;
     }
 
     public Label createTxtLabel() {

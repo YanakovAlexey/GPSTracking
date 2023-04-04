@@ -2,18 +2,19 @@
     display: flex;
     flex-direction: column;
     width: 345px;
-    height: 295px;
+    height: 375px;
     padding: 10px 15px;
     background-color: rgb(43, 43, 43);
     border-radius: 8px;
     box-shadow: 20px #3f3785e8;
-    margin-left: 5px;
+    margin-left: 10px;
+    margin-top: 10px;
     padding-bottom: 45px;
   }
 
   .txtLabel {
+    margin-top: 10px;
     display: flex;
-
     color: aliceblue;
   }
 
@@ -31,7 +32,7 @@
 .createTrackBtn {
     background-color: rgba(37, 109, 156, 0.918);
     color: aliceblue;
-    margin-top: 20px;
+    margin-top: 35px;
   }
   .createTrackBtn:hover {
     background-color: rgba(42, 126, 182, 0.918);
