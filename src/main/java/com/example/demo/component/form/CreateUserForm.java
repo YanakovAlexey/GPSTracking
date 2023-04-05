@@ -17,8 +17,8 @@ import javax.annotation.security.RolesAllowed;
 
 @PageTitle("Создание пользователя")
 @Route(value = "create-user", layout = ContentView.class)
-//@RolesAllowed("ROLE_USER")
-@AnonymousAllowed
+@RolesAllowed("ROLE_ADMIN")
+//@AnonymousAllowed
 public class CreateUserForm extends FormLayout {
     private final TextField usernameField;
     private final PasswordField passwordField;

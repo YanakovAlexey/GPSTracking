@@ -18,7 +18,7 @@ import javax.annotation.security.RolesAllowed;
 @PageTitle("Создание автомобиля")
 @Route(value = "create-car", layout = ContentView.class)
 @RolesAllowed("ROLE_USER")
-@AnonymousAllowed
+//@AnonymousAllowed
 public class CreateCarForm extends FormLayout {
     private final TextField brandField;
     private final TextField modelField;
@@ -31,10 +31,13 @@ public class CreateCarForm extends FormLayout {
     public CreateCarForm(CarServant carServant, AuthenticatedUser authenticatedUser) {
         this.carServant = carServant;
         this.authenticatedUser = authenticatedUser;
+
         this.brandField = createBrandField();
         this.modelField = createModelField();
         this.registrationNumberField = createRegistrationNumberField();
         this.createButton = createButton();
+
+
         addFormItem(this.brandField, "Введите марку автомобиля");
         addFormItem(this.modelField, "Введите модель автомобиля");
         addFormItem(this.registrationNumberField, "Введите регистрационный номер автомобиля");
@@ -44,7 +47,17 @@ public class CreateCarForm extends FormLayout {
         modelField.addClassNames("modelField");
         registrationNumberField.addClassNames("registrationNumberField");
         createButton.addClassNames("enter-button");
-        add(createButton);
+        add(createButton, createForwardButton());
+    }
+
+    private Button createForwardButton() {
+        Button forwardBtn = new Button();
+        forwardBtn.setText("Вернуться на главную");
+        forwardBtn.addClassNames("forward-button");
+        forwardBtn.addClickListener((event) -> {
+            forwardBtn.getUI().ifPresent(ui -> ui.navigate("/main"));
+        });
+        return forwardBtn;
     }
 
     private TextField createModelField() {

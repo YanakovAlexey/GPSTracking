@@ -102,7 +102,7 @@ public class CarRoutesView extends Div {
         createBtn.addClassNames("createTrackBtn");
         createBtn.addClickListener(e -> {
             if (state.carId == 0) {
-                Notification.show("Select car!!!");
+                Notification.show("Автомобиль не выбран!");
                 return;
             }
             var coordinates = locationService.
