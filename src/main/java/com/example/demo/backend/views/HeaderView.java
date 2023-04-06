@@ -19,6 +19,7 @@ public class HeaderView extends HorizontalLayout {
     public HeaderView(AuthenticatedUser authenticatedUser) {
         this.authenticatedUser = authenticatedUser;
         screen();
+        visibleButtonAuth();
     }
 
     public void screen() {
@@ -27,39 +28,21 @@ public class HeaderView extends HorizontalLayout {
         this.addClassNames("view-header");
 
         this.add(createLogo(), authButton);
-
-
-        //        UI.getCurrent().getPage()
-//                .executeJs(
-//                        String.format("console.log('parent class ', '%s')",
-//                                mainLayout != null ? mainLayout.getClass() : "'NOT_PRESENT'")
-//                );
-//        if (mainLayout != null) {
-//            UI.getCurrent().getPage()
-//                    .executeJs(
-//                            String.format("console.log('header class ', '%s')", mainLayout.getHeaderView())
-//                    );
-//            mainLayout.getHeaderView().showButtons();
-//        }
-
-
     }
 
     public void visibleButtonAuth() {
-        if (authenticatedUser.get().isPresent()) {
-            authButton.setText("Выход");
+
+        if (authenticatedUser.get().isEmpty()) {
+            authButton.setText("Вход в систему");
             authButton.addClickListener(event -> {
-                this.authenticatedUser.logout();
+                authButton.getUI().ifPresent(ui ->
+                        ui.navigate("/auth"));
             });
 
         } else {
-            authButton.setText("Вход в систему");
+            authButton.setText("Выход");
             authButton.addClickListener(event -> {
-                if (authenticatedUser.get().isPresent()) {
-                    authButton.getUI().ifPresent(ui ->
-                            ui.navigate("/auth")
-                    );
-                }
+                authenticatedUser.logout();
             });
         }
     }
@@ -67,7 +50,8 @@ public class HeaderView extends HorizontalLayout {
 
     public Div createLogo() {
         Div container = new Div();
-        Anchor refresh = new Anchor("/", new Image("https://i.ibb.co/c112R87/gps-LOGOBlue.png", "My Alt Image"));
+        Anchor refresh = new Anchor("/",
+                new Image("https://i.ibb.co/c112R87/gps-LOGOBlue.png", "My Alt Image"));
         refresh.addClassNames("logo");
         container.add(refresh);
         return container;
