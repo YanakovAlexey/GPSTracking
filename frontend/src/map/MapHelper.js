@@ -25,13 +25,18 @@ window.createMapView = function createMapView(id) {
 }
 
 window.addRoute = function addRoute(pathCoords, color) {
-    console.log("path coords is ", pathCoords)
+    console.log("path coords is ", pathCoords);
     L.polyline(pathCoords, {
         color: color,
         weight: 7,
         opacity: 1
     }).addTo(mainMapView);
-    console.log("Polyline with coords added to map")
+    console.log("Polyline with coords added to map");
+    const coordinate = pathCoords[0];
+    console.log("start coordinate is ", coordinate);
+    if(coordinate && mainMapView){
+        mainMapView.setView(coordinate, 10)
+    }
 }
 
 

@@ -35,6 +35,8 @@ public class HeaderView extends HorizontalLayout {
         if (authenticatedUser.get().isEmpty()) {
             authButton.setText("Вход в систему");
             authButton.addClickListener(event -> {
+//                authButton.setVisible(false);
+
                 authButton.getUI().ifPresent(ui ->
                         ui.navigate("/auth"));
             });
