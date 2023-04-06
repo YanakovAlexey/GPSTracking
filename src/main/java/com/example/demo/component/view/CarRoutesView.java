@@ -7,6 +7,7 @@ import com.example.demo.backend.service.LocationService;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -27,8 +29,8 @@ import java.util.List;
 public class CarRoutesView extends Div {
 
     private Select<Car> carSelect;
-    private final DatePicker departureDatePicker;
-    private final DatePicker returnDatePicker;
+    private final DateTimePicker startDateTimePicker;
+    private final DateTimePicker  endDateTimePicker;
     private final Button createTrackBtn;
 
     private final Button createCarButton;
@@ -53,14 +55,14 @@ public class CarRoutesView extends Div {
         this.mapView = mapView;
 
         this.carSelect = createCarSelect();
-        this.departureDatePicker = createDepartureDatePicker();
-        this.returnDatePicker = createReturnDatePicker();
+        this.startDateTimePicker = createStartDateTimePicker();
+        this.endDateTimePicker = createEndDateTimePicker();
         this.createTrackBtn = createTrackButton();
         this.txtLabel = createTxtLabel();
         this.createCarButton = createCarButton();
 
         this.addClassNames("carRoutesView");
-        this.add(txtLabel, carSelect, departureDatePicker, returnDatePicker, createTrackBtn, createCarButton());
+        this.add(txtLabel, carSelect, startDateTimePicker , endDateTimePicker, createTrackBtn, createCarButton());
     }
 
     private Button createCarButton() {
@@ -106,60 +108,54 @@ public class CarRoutesView extends Div {
                 return;
             }
             var coordinates = locationService.
-                    getAllByCar(state.carId, convertDate(state.departureDate), convertDate(state.returnDate));
+                    getAllByCar(state.carId, convertDate(state.startDateTimePicker ), convertDate(state.endDateTimePicker));
             mapView.addRoute(coordinates);
         });
         return createBtn;
     }
 
-    private DatePicker createDepartureDatePicker() {
-        if (this.departureDatePicker != null)
-            return this.departureDatePicker;
+    private DateTimePicker createStartDateTimePicker() {
+        if (this.startDateTimePicker  != null)
+            return this.startDateTimePicker ;
 
-        DatePicker departureDate = new DatePicker();
-        departureDate.setLabel("Начальная дата");
-        departureDate.addClassNames("departureDate");
-        departureDate.setMax(state.departureDate);
-        departureDate.addValueChangeListener((event) -> {
+        DateTimePicker startDateTimePicker = new DateTimePicker();
+        startDateTimePicker.setLabel("Начальная дата");
+        startDateTimePicker.addClassNames("departureDate");
+        startDateTimePicker.setMax(state.startDateTimePicker );
+        startDateTimePicker.addValueChangeListener((event) -> {
             if (event.getValue() == null) {
                 return;
             }
-            state.departureDate = event.getValue();
+            state.startDateTimePicker  = event.getValue();
         });
-        return departureDate;
+        return startDateTimePicker;
     }
+    private DateTimePicker createEndDateTimePicker() {
+        if (this.endDateTimePicker != null)
+            return this.endDateTimePicker;
 
-    private DatePicker createReturnDatePicker() {
-        if (this.returnDatePicker != null)
-            return this.returnDatePicker;
-
-        DatePicker returnDate = new DatePicker();
-        returnDate.setLabel("Финальная дата");
-        returnDate.addClassNames("returnDate");
-        returnDate.setMin(state.returnDate);
-        returnDate.addValueChangeListener((event) -> {
+        DateTimePicker endDateTimePicker = new DateTimePicker();
+        endDateTimePicker.setLabel("Финальная дата");
+        endDateTimePicker.addClassNames("returnDate");
+        endDateTimePicker.setMin(state.endDateTimePicker);
+        endDateTimePicker.addValueChangeListener((event) -> {
             if (event.getValue() == null) {
                 return;
             }
-            state.returnDate = event.getValue();
+            state.endDateTimePicker = event.getValue();
         });
-        return returnDate;
+        return endDateTimePicker;
     }
-
-    private ZonedDateTime convertDate(LocalDate date) {
-        return date.atStartOfDay(ZoneId.systemDefault());
+    private ZonedDateTime convertDate(LocalDateTime dateTime) {
+        return dateTime.atZone(ZoneId.systemDefault());
     }
-
     private static class CarRouteViewModel {
         final List<Car> cars;
         long carId = 0;
-        LocalDate departureDate;
-        LocalDate returnDate;
-
+        LocalDateTime startDateTimePicker ;
+        LocalDateTime endDateTimePicker;
         CarRouteViewModel(List<Car> cars) {
             this.cars = cars;
         }
-
-
     }
 }

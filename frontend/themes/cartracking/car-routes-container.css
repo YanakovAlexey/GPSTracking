@@ -44,14 +44,19 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 550;
 }
-  vaadin-date-picker > label {
+  vaadin-date-time-picker > label {
     font-family: 'Roboto', sans-serif;
     font-weight: 550;
     
     color: rgb(12, 106, 189);
 }
 
-vaadin-date-picker::part(input-field){
+vaadin-date-time-picker-date-picker::part(input-field){
+  background-color: rgb(226, 226, 226);
+  border-radius: 3px;
+}
+
+vaadin-date-time-picker-time-picker::part(input-field){
   background-color: rgb(226, 226, 226);
   border-radius: 3px;
 }
