@@ -13,4 +13,6 @@ public interface LocationService {
     List<Location> getAllLocations();
 
     List<MapJSUtil.Coordinate> getAllByCar(long carId, ZonedDateTime start, ZonedDateTime end);
+
+    void loadLocations(long carId, String filePath);
 }

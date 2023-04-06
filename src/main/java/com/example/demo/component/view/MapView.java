@@ -53,4 +53,5 @@ public class MapView extends VerticalLayout {
     public void addRoute(List<MapJSUtil.Coordinate> coordinates) {
         mapView.addPolyline(coordinates);
     }
+
 }

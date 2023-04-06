@@ -12,6 +12,6 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     Location save(Location location);
 
-    List<Location> searchByCarAndCreatedAtBetween(Car car, ZonedDateTime start, ZonedDateTime end);
+    List<Location> searchByCarAndMeasureTimeBetween(Car car, ZonedDateTime start, ZonedDateTime end);
 }
 

@@ -5,6 +5,7 @@ import com.example.demo.backend.domain.Location;
 import com.example.demo.backend.repository.CarRepository;
 import com.example.demo.backend.repository.LocationRepository;
 import com.example.demo.backend.service.LocationService;
+import com.example.demo.utils.CoordinateReader;
 import com.example.demo.utils.MapJSUtil;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,7 @@ public class LocationServiceImpl implements LocationService {
         }
 
         var locations = locationRepository
-                .searchByCarAndCreatedAtBetween(car.get(), start, end)
+                .searchByCarAndMeasureTimeBetween(car.get(), start, end)
                 .stream()
                 .map(location -> new MapJSUtil.Coordinate(location.getLat(), location.getLon()))
                 .toList();
@@ -55,5 +56,16 @@ public class LocationServiceImpl implements LocationService {
 
         return locations;
     }
+
+    @Override
+    public void loadLocations(long carId, String filePath) {
+        Optional<Car> car = carRepository.findById(carId);
+        if (car.isEmpty()) {
+            throw new RuntimeException("Такого автомобиля не существует");
+        }
+        var locations = CoordinateReader.readCoordinatesForCar(car.get(), filePath);
+        locationRepository.saveAll(locations);
+    }
+
 }
 

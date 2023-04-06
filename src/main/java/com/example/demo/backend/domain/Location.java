@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Table(name = "location")
 @Setter
@@ -22,4 +23,7 @@ public class Location extends PersistentObject {
     double lat;
     @Column(name = "lon")
     double lon;
+
+    @Column(name = "measure_time")
+    ZonedDateTime measureTime;
 }
