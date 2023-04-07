@@ -10,10 +10,10 @@
   margin: 26px 20px 10px auto;
   background-color: rgba(37, 109, 156, 0.918);
   color: aliceblue;
+  cursor: pointer;
 }
 .auth-button:hover {
   background-color: rgba(42, 126, 182, 0.918);
-  cursor: pointer;
 }
 
 .exit-button {
@@ -33,5 +33,16 @@
   width: 70px;
   height: 70px;
 }
+
+@media screen and (max-width: 600px) {
+  .logo {
+    display: flex;
+    padding: 15px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+  }
+}
+
 
 

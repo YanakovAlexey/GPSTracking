@@ -1,5 +1,5 @@
 .authorization-view {
-    width: 30%;
+    width: 40%;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
@@ -15,6 +15,13 @@
     animation: fadeIn;
     animation-duration: 0.4s;
 }
+
+
+@media screen and (max-width: 600px) {
+    .authorization-view {
+        width: 80%;
+    }
+  }
 
 .login-txtBox{
     width: 315px;
