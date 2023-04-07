@@ -13,12 +13,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
-import javax.annotation.security.RolesAllowed;
-
 @PageTitle("Создание пользователя")
 @Route(value = "create-user", layout = ContentView.class)
-@RolesAllowed("ROLE_ADMIN")
-//@AnonymousAllowed
+@AnonymousAllowed
 public class CreateUserForm extends FormLayout {
     private final TextField usernameField;
     private final PasswordField passwordField;
@@ -28,6 +25,7 @@ public class CreateUserForm extends FormLayout {
     private final UserViewModel state = new UserViewModel();
     private final Select<Roles> selectRoles;
     private final UserServant userServant;
+
     public CreateUserForm(UserServant userServant) {
         this.userServant = userServant;
 
@@ -45,8 +43,10 @@ public class CreateUserForm extends FormLayout {
         addFormItem(this.emailField, "Введите почту");
         addFormItem(this.phoneField, "Введите номер телефона");
         addFormItem(this.selectRoles, "Выберите права доступа:");
-        addClassNames("user-view");
+
         add(this.createButton);
+
+        addClassNames("user-view");
         this.usernameField.addClassNames("username-txtBox");
         this.passwordField.addClassNames("password-txtBox");
         this.emailField.addClassNames("email-txtBox");
@@ -55,6 +55,7 @@ public class CreateUserForm extends FormLayout {
         this.createButton.addClassNames("createUser-btn");
 
     }
+
     private Select<Roles> createSelect() {
         if (this.selectRoles != null)
             return this.selectRoles;
@@ -64,12 +65,13 @@ public class CreateUserForm extends FormLayout {
 
         roles.setItems(Roles.USER, Roles.ADMIN);
         roles.addValueChangeListener(event -> {
-           if (event.getValue() == null)
-               return;
-           this.state.role = event.getValue();
+            if (event.getValue() == null)
+                return;
+            this.state.role = event.getValue();
         });
         return roles;
     }
+
     private TextField createUsernameField() {
         if (this.usernameField != null)
             return this.usernameField;
@@ -85,6 +87,7 @@ public class CreateUserForm extends FormLayout {
         });
         return username;
     }
+
     private PasswordField createPasswordField() {
         if (this.passwordField != null)
             return this.passwordField;
@@ -138,6 +141,7 @@ public class CreateUserForm extends FormLayout {
         Button button = new Button("Добавить пользователя");
         button.addClickListener((event) -> {
             createUser();
+            button.getUI().ifPresent(ui -> ui.navigate("/auth"));
         });
         return button;
     }
@@ -150,6 +154,7 @@ public class CreateUserForm extends FormLayout {
             Notification.show(e.getMessage()).open();
         }
     }
+
     private static class UserViewModel {
         String username = "";
         String password = "";

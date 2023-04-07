@@ -3,12 +3,10 @@ package com.example.demo.ui;
 import com.example.demo.utils.ColorRoad;
 import com.example.demo.utils.MapJSUtil;
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
 
 import java.util.Collection;
-import java.util.Random;
 
 @JsModule("./src/map/MapHelper.js")
 public class OSMMapView extends Div {

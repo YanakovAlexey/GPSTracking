@@ -15,19 +15,22 @@ import org.springframework.stereotype.Component;
 public class HeaderView extends HorizontalLayout {
     private final AuthenticatedUser authenticatedUser;
     public Button authButton = new Button("Вход в систему");
+    private Button messageButton = new Button("Сообщение");
 
     public HeaderView(AuthenticatedUser authenticatedUser) {
         this.authenticatedUser = authenticatedUser;
         screen();
         visibleButtonAuth();
+        visibleButtonMessage();
     }
 
     public void screen() {
         authButton.addClassNames("auth-button");
+        messageButton.addClassNames("message-button");
 
         this.addClassNames("view-header");
 
-        this.add(createLogo(), authButton);
+        this.add(createLogo(), messageButton, authButton);
     }
 
     public void visibleButtonAuth() {
@@ -47,6 +50,20 @@ public class HeaderView extends HorizontalLayout {
                 authenticatedUser.logout();
             });
         }
+    }
+
+    public void visibleButtonMessage() {
+        if (authenticatedUser.get().isEmpty()) {
+            messageButton.setVisible(false);
+
+        } else {
+            messageButton.setVisible(true);
+            messageButton.addClickListener(event -> {
+                messageButton.getUI().ifPresent(ui ->
+                        ui.navigate("/message"));
+            });
+        }
+
     }
 
 

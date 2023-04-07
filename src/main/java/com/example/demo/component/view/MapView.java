@@ -1,6 +1,5 @@
 package com.example.demo.component.view;
 
-import com.example.demo.backend.service.CarService;
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
 import com.example.demo.backend.views.HeaderView;
 import com.example.demo.ui.OSMMapView;
@@ -31,6 +30,7 @@ public class MapView extends VerticalLayout {
         this.setPadding(false);
         this.addClassNames("body");
         this.headerView.visibleButtonAuth();
+        this.headerView.visibleButtonMessage();
 
         this.btnCenter.addClickListener(e -> {
             final Random rnd = new Random();

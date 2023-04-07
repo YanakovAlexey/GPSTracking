@@ -5,7 +5,6 @@ import com.example.demo.backend.views.SideBarView;
 import com.example.demo.component.view.MapView;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,6 @@ import javax.annotation.security.RolesAllowed;
 
 @Route(value = "/main", layout = MainLayout.class)
 @RolesAllowed("ROLE_USER")
-//@AnonymousAllowed
 @Component
 @UIScope
 public class MainPage extends SplitLayout {

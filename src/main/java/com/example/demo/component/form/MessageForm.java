@@ -9,7 +9,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.Arrays;
@@ -17,7 +16,6 @@ import java.util.Arrays;
 
 @Route(value = "message", layout = ContentView.class)
 @RolesAllowed("ROLE_USER")
-//@AnonymousAllowed
 public class MessageForm extends Div {
     private final MessageViewModel state = new MessageViewModel();
     public MessageForm() {

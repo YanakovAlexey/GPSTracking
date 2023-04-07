@@ -1,7 +1,5 @@
 package com.example.demo.component.form;
 
-import com.example.demo.backend.domain.User;
-import com.example.demo.backend.domain.UserCar;
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
 import com.example.demo.backend.service.servant.CarServant;
 import com.example.demo.backend.views.ContentView;
@@ -11,14 +9,12 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import javax.annotation.security.RolesAllowed;
 
 @PageTitle("Создание автомобиля")
 @Route(value = "create-car", layout = ContentView.class)
 @RolesAllowed("ROLE_USER")
-//@AnonymousAllowed
 public class CreateCarForm extends FormLayout {
     private final TextField brandField;
     private final TextField modelField;

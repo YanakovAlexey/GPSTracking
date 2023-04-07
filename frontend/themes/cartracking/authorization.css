@@ -43,3 +43,18 @@
     background-color: rgba(42, 126, 182, 0.918);
     cursor: pointer;
 }
+
+.reg-link{
+    width: 20px;
+    padding: 3px 0px 3px 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 3px;
+    background-color: rgba(37, 109, 156, 0.918);
+    color: aliceblue;
+}
+.reg-link:hover {
+    background-color: rgba(42, 126, 182, 0.918);
+    cursor: pointer;
+}

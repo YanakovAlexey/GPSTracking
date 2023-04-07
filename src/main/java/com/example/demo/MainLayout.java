@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 public class MainLayout extends VerticalLayout implements RouterLayout {
 
     private final HeaderView headerView;
-    //private final ContentView contentView;
     private final AuthenticatedUser authenticatedUser;
 
     private final Label label = new Label("" +
@@ -31,12 +30,10 @@ public class MainLayout extends VerticalLayout implements RouterLayout {
     public MainLayout(HeaderView headerView, AuthenticatedUser authenticatedUser) {
         this.headerView = headerView;
         this.authenticatedUser = authenticatedUser;
-        //this.contentView = new ContentView();
         this.addClassNames("main-view");
         this.label.addClassNames("content-label");
         setPadding(false);
 
         add(this.headerView);
     }
-
 }
