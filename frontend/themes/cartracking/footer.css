@@ -1,0 +1,7 @@
+.view-footer {
+  bottom: 0;
+  background-color: rgb(43, 43, 43);
+  z-index: 2;
+  left: 0;
+  width: 100%;
+}

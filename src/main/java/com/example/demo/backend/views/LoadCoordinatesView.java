@@ -31,6 +31,4 @@ public class LoadCoordinatesView extends Div {
 
         this.add(carIdField, pathfield, load);
     }
-
-
 }

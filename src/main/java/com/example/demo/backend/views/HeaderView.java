@@ -1,7 +1,6 @@
 package com.example.demo.backend.views;
 
 import com.example.demo.backend.service.Impl.security.AuthenticatedUser;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
